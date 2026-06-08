@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterLink } from "vue-router";
 const props = defineProps({
   misterio: {
     type: Object,
@@ -12,6 +12,9 @@ const props = defineProps({
 <template>
 
   <div v-if="props.misterio" class="misterio-page">
+    <RouterLink to="/colecao" class="back-link">
+      ← Voltar para coleção
+    </RouterLink>
 
     <div class="tag">
       MISTÉRIO DESBLOQUEADO
@@ -144,5 +147,21 @@ h1 {
   font-size: 1.1rem;
 
   color: #f5f0e8;
+}
+
+.back-link {
+
+  align-self: flex-start;
+
+  margin-bottom: 24px;
+
+  color: #c7b299;
+
+  text-decoration: none;
+}
+
+.back-link:hover {
+
+  color: #f1e7d8;
 }
 </style>

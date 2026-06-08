@@ -88,10 +88,6 @@ function desbloquear() {
 
 <template>
 
-
-  <RouterLink to="/colecao" class="collection-link">
-    Ver coleção completa
-  </RouterLink>
   <div>
 
     <LandingPage v-if="!id" />

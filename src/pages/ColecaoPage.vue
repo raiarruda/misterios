@@ -3,6 +3,9 @@
 import { computed } from "vue";
 import misterios from "../data/misterios-master";
 import MisterioCard from "../components/MisterioCard.vue";
+const percentual = computed(() =>
+  (totalDescobertos.value / lista.value.length) * 100
+);
 
 const lista = computed(() => {
 
@@ -42,13 +45,19 @@ const totalDescobertos = computed(() => {
       Coleção de Mistérios
     </h1>
 
-    <p class="subtitle">
+    <div class="progress">
 
+      <div class="progress-fill" :style="{
+        width: `${percentual}%`
+      }" />
+
+    </div>
+
+    <p class="subtitle">
       {{ totalDescobertos }}
       de
       {{ lista.length }}
       descobertos
-
     </p>
 
     <div class="grid">
@@ -60,9 +69,41 @@ const totalDescobertos = computed(() => {
 
   </div>
 
+
+
 </template>
 
 <style scoped>
+.progress {
+
+  width: 300px;
+
+  max-width: 90vw;
+
+  height: 10px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, .08);
+}
+
+.progress-fill {
+
+  height: 100%;
+
+  background:
+    linear-gradient(90deg,
+      #5b1017,
+      #8d1c2c);
+
+  transition: .3s;
+}
+
 .page {
 
   max-width: 1200px;
