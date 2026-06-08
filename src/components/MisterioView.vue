@@ -1,97 +1,148 @@
 <script setup>
-defineProps({
-  misterio: Object
-})
+
+const props = defineProps({
+  misterio: {
+    type: Object,
+    required: true
+  }
+});
+
 </script>
 
 <template>
 
-  <div class="misterio">
+  <div v-if="props.misterio" class="misterio-page">
 
-    <div class="cabecalho">
-
-      <h1>
-        {{ misterio.titulo }}
-      </h1>
-
-      <p class="frase">
-        {{ misterio.frase }}
-      </p>
-
+    <div class="tag">
+      MISTÉRIO DESBLOQUEADO
     </div>
 
-    <div class="conteudo">
+    <div v-if="props.misterio.icone" class="icone">
+      {{ props.misterio.icone }}
+    </div>
+
+    <h1>
+      {{ props.misterio.titulo }}
+    </h1>
+
+    <p class="frase">
+      {{ props.misterio.frase }}
+    </p>
+
+    <section class="card">
+
+      <h2>
+        O QUE VAI ACONTECER?
+      </h2>
 
       <p>
-        {{ misterio.descricao }}
+        {{ props.misterio.descricao }}
       </p>
 
-    </div>
+    </section>
 
   </div>
 
 </template>
 
 <style scoped>
-.misterio {
-  max-width: 900px;
+.misterio-page {
 
-  margin: auto;
+  min-height: 100vh;
 
-  padding: 40px;
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding: 60px 24px;
 }
 
-.cabecalho {
+.tag {
 
-  text-align: center;
+  background: #5b1017;
 
-  border: 1px solid #3d3d3d;
+  color: #f1e7d8;
 
-  background:
-    rgba(255, 255, 255, 0.03);
+  padding: 10px 20px;
 
-  border-radius: 16px;
+  border-radius: 999px;
 
-  padding: 40px;
+  letter-spacing: 2px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  margin-bottom: 32px;
 }
 
-.codigo {
+.icone {
 
-  color: #a68a56;
+  font-size: 4rem;
 
-  letter-spacing: 4px;
-
-  font-size: 14px;
+  margin-bottom: 16px;
 }
 
 h1 {
 
-  margin-top: 16px;
+  text-align: center;
 
-  font-family:
-    "Cinzel",
-    serif;
+  font-size: clamp(2rem, 5vw, 4rem);
 
-  color: #d4c3a0;
+  margin-bottom: 24px;
+
+  color: #f5f0e8;
 }
 
 .frase {
 
+  max-width: 700px;
+
+  text-align: center;
+
+  font-size: 1.2rem;
+
   font-style: italic;
 
-  font-size: 1.3rem;
+  color: #c7b299;
 
-  color: #d6d0c8;
+  margin-bottom: 40px;
 }
 
-.conteudo {
+.card {
 
-  margin-top: 24px;
+  width: min(800px, 95vw);
 
-  border-left: 4px solid #5b1017;
+  padding: 40px;
 
-  padding-left: 24px;
+  border-radius: 24px;
 
-  line-height: 1.8;
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(10px);
+}
+
+.card h2 {
+
+  margin-bottom: 20px;
+
+  letter-spacing: 2px;
+
+  font-size: 14px;
+
+  color: #a68a56;
+}
+
+.card p {
+
+  line-height: 1.9;
+
+  font-size: 1.1rem;
+
+  color: #f5f0e8;
 }
 </style>
