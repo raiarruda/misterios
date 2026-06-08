@@ -10,10 +10,6 @@ defineProps({
 
     <div class="cabecalho">
 
-      <span class="codigo">
-        {{ misterio.codigo }}
-      </span>
-
       <h1>
         {{ misterio.titulo }}
       </h1>

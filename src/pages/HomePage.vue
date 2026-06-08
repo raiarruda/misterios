@@ -94,37 +94,39 @@ function desbloquear() {
 
     <template v-else>
 
-      <div v-if="!desbloqueado">
+      <div v-if="!desbloqueado" class="unlock-card">
+
+        <div class="seal">
+          ARQUIVO CLASSIFICADO
+        </div>
 
         <h1>
-          🦇 Arquivo Encontrado
+          Um novo mistério foi localizado
         </h1>
 
-        <p>
-          Código identificado:
-          <strong>
-            {{ misterio.codigo }}
-          </strong>
+        <p class="subtitle">
+          Digite a chave encontrada na raspadinha para acessar o conteúdo.
         </p>
 
-        <p>
-          Um novo mistério aguarda desbloqueio.
-        </p>
-        <p>
-          Digite a chave encontrada na raspadinha.
-        </p>
+        <div class="input-area">
 
-        <input v-model="senha" placeholder="Digite a chave" />
+          <input v-model="senha" class="password-input" @keyup.enter="desbloquear" placeholder="Digite a chave" />
 
-        <p v-if="erroSenha">
-          Chave inválida.
-        </p>
+          <Transition name="fade">
 
-        <button @click="desbloquear">
-          DESBLOQUEAR MISTÉRIO
-        </button>
+            <p v-if="erroSenha" class="error">
+              Chave inválida.
+            </p>
+
+          </Transition>
+
+          <button class="unlock-button" @click="desbloquear">
+            DESBLOQUEAR
+          </button>
+
+        </div>
+
       </div>
-
       <MisterioView v-else :misterio="misterio" />
 
     </template>
@@ -136,19 +138,112 @@ function desbloquear() {
 
 <style scoped>
 button {
-
   background: #5b1017;
-
   color: white;
-
   border: none;
-
   padding: 14px 24px;
-
   border-radius: 8px;
-
   cursor: pointer;
-
   font-weight: bold;
+}
+
+.unlock-card {
+  width: min(700px, 90vw);
+  margin: 80px auto;
+  padding: 48px;
+  border-radius: 20px;
+  background:
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.seal {
+
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #5b1017;
+  color: #f1e7d8;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.subtitle {
+  opacity: 0.8;
+  margin-bottom: 32px;
+}
+
+.password-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #5b1017;
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+}
+
+.password-input:focus {
+
+  border-color: #a68a56;
+
+  box-shadow:
+    0 0 0 2px rgba(166, 138, 86, .25);
+}
+
+.unlock-button {
+
+  margin-top: 24px;
+  padding: 16px 28px;
+  border: none;
+  border-radius: 12px;
+  background: #5b1017;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.unlock-button:hover {
+
+  transform: translateY(-1px);
+}
+
+.error {
+
+  color: #ff8b8b;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  min-height: 20px;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 32px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
 }
 </style>
