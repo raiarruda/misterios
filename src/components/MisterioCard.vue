@@ -1,62 +1,57 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { computed } from "vue";
+
 const props = defineProps({
   misterio: {
     type: Object,
     required: true
   },
-
-  descoberto: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    required: true
   }
 });
 
+const descoberto = computed(() => props.status === "DESCOBERTO");
+const concluido = computed(() => props.status === "CONCLUIDO");
 </script>
 
 <template>
-
-
-  <RouterLink v-if="descoberto" :to="`/?id=${misterio.id}`" class="card-link">
-    <div class="card descoberto">
+  <!-- Link ativo para Descoberto ou Concluído -->
+  <RouterLink v-if="descoberto || concluido" :to="`/?id=${misterio.id}`" class="card-link">
+    <div class="card shine-effect" :class="{ descoberto, concluido }">
 
       <div class="icon">
         {{ misterio.icone }}
       </div>
 
-      <h3>
-        {{ misterio.titulo }}
-      </h3>
-
-      <p>
-        🔓 Revisitar
-      </p>
-
+      <!-- Envolvemos o conteúdo textual para controlar o alinhamento e espaçamento -->
+      <div class="info">
+        <h3>{{ misterio.titulo }}</h3>
+        <p v-if="descoberto">📖 Ver Detalhes</p>
+        <p v-else-if="concluido">✨ Revisitar</p>
+      </div>
     </div>
   </RouterLink>
 
-
+  <!-- Estado Oculto -->
   <template v-else>
-    <div class="card ">
+    <div class="card oculto">
       <div class="icon">
         🔒
       </div>
 
-      <h3>
-        Mistério {{ misterio.ordem }}
-      </h3>
-
-      <p>
-        Ainda oculto
-      </p>
+      <div class="info">
+        <h3>Mistério {{ misterio.ordem }}</h3>
+        <p>Ainda oculto</p>
+      </div>
     </div>
   </template>
-
-
 </template>
 
+
 <style scoped>
-/* Elements Base */
 h3 {
   font-size: 1rem;
   line-height: 1.2;
@@ -71,18 +66,11 @@ p {
   opacity: .7;
 }
 
-/* Links */
 .card-link {
   display: block;
   text-decoration: none;
   color: inherit;
   height: 100%;
-}
-
-/* Elements Global */
-.titulo {
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 .icon {
@@ -91,104 +79,176 @@ p {
   backface-visibility: hidden;
 }
 
-/* Component: Card Base (Bloqueado / Mistério) */
+/* Base Comum de Todos os Cards */
 .card {
+  position: relative;
+  /* Necessário para posicionar o brilho */
+  overflow: hidden;
+  /* Corta o brilho quando ele sai das bordas do card */
   border-radius: 5px;
   padding: 24px;
   text-align: center;
-  opacity: .6;
-  background: linear-gradient(180deg, rgba(40, 40, 40, .15), rgba(20, 20, 20, .4));
-  border: 1px dashed rgba(166, 138, 86, .25);
-  /* Borda tracejada de mistério */
-  cursor: pointer;
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Empurra o ícone para cima e o texto para baixo */
+  align-items: center;
+  height: 100%;
+  /* Ocupa o tamanho máximo da linha do grid */
+  min-height: 220px;
+  /* Define uma altura mínima segura para que todos fiquem iguais */
+  box-sizing: border-box;
+  /* Evita que o padding altere o tamanho final calculados */
+
 }
 
-/* Efeito de hover no Card Bloqueado */
-.card:not(.descoberto):hover {
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  /* Faz o bloco de texto preencher o espaço restante */
+  width: 100%;
+}
+
+/* --- 🌟 Efeito de Brilho Reflexivo (Shine) --- */
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  /* Começa completamente fora do card à esquerda */
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.13) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  /* Inclina a faixa de luz */
+  transition: none;
+}
+
+/* Dispara o movimento da luz no hover */
+.shine-effect:hover::after {
+  left: 150%;
+  /* Atravessa o card até sumir à direita */
+  transition: left 0.6s ease-in-out;
+}
+
+/* --- ESTADO: OCULTO --- */
+.card.oculto {
+  opacity: .6;
+  background: linear-gradient(180deg, rgba(40, 40, 40, .15), rgba(20, 20, 20, .4));
+  border: 1px dashed rgba(166, 138, 86, .25);
+  cursor: not-allowed;
+}
+
+.card.oculto:hover {
   transform: translateY(-4px);
   opacity: .85;
   border-color: rgba(166, 138, 86, .5);
   box-shadow: 0 8px 25px rgba(166, 138, 86, .1);
 }
 
-/* Esconde / Modifica itens do card enquanto bloqueado */
-.card:not(.descoberto) .icon {
+.card.oculto .icon {
   filter: grayscale(100%) blur(1px);
   opacity: 0.5;
-  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-.card:not(.descoberto):hover .icon {
-  filter: grayscale(30%) blur(0px);
-  opacity: 0.8;
-}
-
-.card:not(.descoberto) h3 {
+.card.oculto h3 {
   color: rgba(255, 255, 255, 0.4);
   filter: blur(4px);
-  /* Texto do título borrado até descobrir! */
-  transition: filter 0.3s ease, color 0.3s ease;
 }
 
-/* Component: Card State (Descoberto / Revelado) */
+/* --- ESTADO: DESCOBERTO --- */
 .descoberto {
-  opacity: 1 !important;
-  border: 1px solid #7d1b26;
-  border-width: 2px;
-  border-color: rgba(166, 138, 86, .4);
-  background: linear-gradient(180deg, rgba(91, 16, 23, .25), rgba(25, 10, 12, .85));
-  box-shadow: 0 0 25px rgba(91, 16, 23, .20);
+  opacity: 1;
+  border: 2px solid rgba(166, 138, 86, .4);
+  background: linear-gradient(180deg, rgba(91, 16, 23, .35), rgba(25, 10, 12, .9));
+  box-shadow: 0 0 25px rgba(91, 16, 23, .25);
 }
 
 .descoberto:hover {
   border-color: #a32736;
-  box-shadow: 0 0 35px rgba(163, 39, 54, .35);
+  box-shadow: 0 0 35px rgba(163, 39, 54, .4);
   transform: translateY(-4px);
 }
 
-/* Interações após Descoberto */
 .descoberto h3 {
   color: #f1e7d8;
-  filter: blur(0px) !important;
 }
 
-.descoberto .titulo {
+/* --- ESTADO: CONCLUIDO --- */
+.concluido {
   opacity: 1;
+  border: 2px solid #a68a56;
+  background: linear-gradient(180deg, rgba(47, 107, 66, .25), rgba(15, 30, 20, .95));
+  box-shadow: 0 0 25px rgba(47, 107, 66, .25);
 }
 
-.descoberto .icon {
-  filter: drop-shadow(0 0 8px rgba(166, 138, 86, .35)) !important;
-  opacity: 1 !important;
+/* Intensifica a faixa de luz para o mistério concluído */
+.concluido.shine-effect::after {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      rgba(255, 255, 255, 0) 100%);
 }
 
-/* Responsiveness */
+.concluido:hover {
+  border-color: #c4ab76;
+  box-shadow: 0 0 35px rgba(63, 138, 85, .4);
+  transform: translateY(-4px);
+}
+
+.concluido h3 {
+  color: #7fd69c;
+}
+
+.concluido p {
+  color: #a68a56;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .card {
-    aspect-ratio: 0.85;
-    padding: 8px;
-    border-radius: 5px;
+    /* 🌟 Removemos o aspect-ratio para o card não esticar igual um retângulo vertical */
+    aspect-ratio: auto !important;
+    padding: 16px 8px !important;
+    /* Padding vertical confortável */
+    min-height: 110px;
+    /* Altura mínima estável para o mobile */
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    /* Espaçamento fixo entre os elementos internos */
   }
 
   .icon {
-    font-size: 2rem;
-    margin-bottom: 4px;
-  }
-
-  .codigo {
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 1.8rem !important;
+    /* Tamanho controlado do cadeado/ícone */
+    margin-bottom: 0 !important;
+    line-height: 1;
   }
 
   .card h3 {
-    font-size: 0.9rem;
-    margin: 0;
+    font-size: 0.8rem !important;
+    line-height: 1.2;
+    margin: 0 !important;
+    padding: 0 4px;
+    width: 100%;
+    word-break: break-word;
+    /* Evita que o texto quebre a borda */
   }
 
   .card p {
-    display: none;
+    display: none !important;
+    /* Garante que o texto de ação suma no mobile */
   }
 }
 </style>
