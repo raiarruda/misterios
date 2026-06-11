@@ -1,7 +1,7 @@
 export default {
   "7f31": {
     codigo: "FORT01",
-    senha: "CABANA01",
+    senha: "CABANA01<3",
     titulo: "Fortaleza de Cobertores de Cinema",
     frase: "Nosso refúgio aconchegante no meio da sala 🎪🎬",
     categoria: "casa",
@@ -18,7 +18,7 @@ export default {
 
   a91c: {
     codigo: "ARTE02",
-    senha: "TINTA02",
+    senha: "TINTA02<3",
     titulo: "Pintura às Cegas do Nosso Retrato",
     frase: "Arte, risadas e um retrato feito às cegas 🎨👀",
     categoria: "criativo",
@@ -35,7 +35,7 @@ export default {
 
   c2d7: {
     codigo: "DRINK03",
-    senha: "ALQUIMIA03",
+    senha: "ALQUIMIA03<3",
     titulo: "Noite dos Coquetéis do Casal",
     frase:
       "Alquimia na cozinha: criando o coquetel exclusivo do nosso amor 🍸🍋",
@@ -53,7 +53,7 @@ export default {
 
   e8f4: {
     codigo: "NOIR04",
-    senha: "CHARME04",
+    senha: "CHARME04<3",
     titulo: "Noite do Charme Noir (Dress Code Secreto)",
     frase: "Traje de gala, mistério e um vinho para brindar a dois... 🖤",
     categoria: "casa",
@@ -70,7 +70,7 @@ export default {
 
   b6a1: {
     codigo: "LIVRO05",
-    senha: "SEBO05",
+    senha: "SEBO05<3",
     titulo: "Caça ao Tesouro Literária",
     frase: "Páginas de mistério e uma mensagem escondida 📚❤️",
     categoria: "rua",
@@ -87,7 +87,7 @@ export default {
 
   f9c3: {
     codigo: "POR06",
-    senha: "CESTA06",
+    senha: "CESTA06<3",
     titulo: "Piquenique do Pôr do Sol na Lagoa",
     frase: "Pôr do sol, lanche caprichado e brisa no rosto 🧺🌅",
     categoria: "rua",
@@ -104,7 +104,7 @@ export default {
 
   k7m2: {
     codigo: "RIO07",
-    senha: "CHAPADA07",
+    senha: "CHAPADA07<3",
     titulo: "Fim de Semana em Rio de Contas",
     frase: "Malas prontas para o frio e o charme das montanhas ⛰️🚙",
     categoria: "viagem",
@@ -121,7 +121,7 @@ export default {
 
   h4p8: {
     codigo: "CAFE08",
-    senha: "RIGNO08",
+    senha: "RIGNO08<3",
     titulo: "Tarde de Cafés Especiais e Conversas Longas",
     frase: "Aroma de café premium, doçura e uma tarde inteira só nossa ☕🍰",
     categoria: "rua",
@@ -138,7 +138,7 @@ export default {
 
   q1x5: {
     codigo: "CIN09",
-    senha: "ESCURO09",
+    senha: "ESCURO09<3",
     titulo: "Cinema às Cegas",
     frase:
       "Luzes apagadas, tela gigante e um destino cinematográfico secreto 🎬🍿",
@@ -156,7 +156,7 @@ export default {
 
   r8v6: {
     codigo: "GALA10",
-    senha: "CHIQUE10",
+    senha: "CHIQUE10<3",
     titulo: "Missão Overdressed (Elegantes para o Incomum)",
     frase: "Traje de gala para um destino surpreendente e descontraído 🕴️💃",
     categoria: "rua",
@@ -173,7 +173,7 @@ export default {
 
   t3w9: {
     codigo: "VIN11",
-    senha: "TAÇA11",
+    senha: "TAÇA11<3",
     titulo: "Noite da Alta Gastronomia e Vinho",
     frase:
       "Uma noite de alta gastronomia, sofisticação e as melhores taças de vinho... 🍷✨",
@@ -191,7 +191,7 @@ export default {
 
   u5y2: {
     codigo: "FON12",
-    senha: "DOCE12",
+    senha: "DOCE12<3",
     titulo: "Rodízio Caseiro de Fondue",
     frase: "Uma noite quente de queijo e chocolate derretido... 🍫🍓",
     categoria: "casa",
@@ -208,7 +208,7 @@ export default {
 
   z7n4: {
     codigo: "ITA13",
-    senha: "NHOQUE13",
+    senha: "NHOQUE13<3",
     titulo: "Menu Italiano do Zero",
     frase:
       "Farinha na cozinha, música italiana e massa feita do zero a dois 🍝🇮🇹",
@@ -226,7 +226,7 @@ export default {
 
   m8k6: {
     codigo: "ESC14",
-    senha: "MOLDAR14",
+    senha: "MOLDAR14<3",
     titulo: "Escultura com Massinha de Modelar",
     frase: "Formas, cores e muita imaginação moldada com as mãos... 🏺👐",
     categoria: "casa",
@@ -243,7 +243,7 @@ export default {
 
   p2j9: {
     codigo: "PPT15",
-    senha: "SLIDES15",
+    senha: "SLIDES15<3",
     titulo: "Noite da Apresentação de Slides",
     frase:
       "Gráficos, risadas e apresentações hilárias feitas um para o outro 📊😂",
